@@ -27,27 +27,32 @@ public class Produit implements Serializable {
     
     private String denomination;
     
-    private int prix;
+    private double prix;
     
-    private float poids;
+    private double poids;
     
-    private float volume;
+    private double volume;
     
     public Produit(){
         super();
     }
-    
-    public Produit(String nom,int p){
-        referenceProduit=nom;
-        prix=p;
-    }
 
+    public Produit(String referenceProduit, Marque marqueProduit, String denomination, double prix, double poids, double volume) {
+        this.referenceProduit = referenceProduit;
+        this.marqueProduit = marqueProduit;
+        this.denomination = denomination;
+        this.prix = prix;
+        this.poids = poids;
+        this.volume = volume;
+    }
+    
+    
     /**
      * Get the value of Prix
      *
      * @return the value of Prix
      */
-    public int getPrix() {
+    public double getPrix() {
         return prix;
     }
 
@@ -56,12 +61,12 @@ public class Produit implements Serializable {
      *
      * @param prix new value of Prix
      */
-    public void setPrix(int prix) {
+    public void setPrix(double prix) {
         this.prix = prix;
     }
 
 
-    public String getReferenceProduit() {
+    public String getReferenceProduit() { 
         return referenceProduit;
     }
 
@@ -85,17 +90,17 @@ public class Produit implements Serializable {
          this.denomination=denomination;
     }
  
-    public float getPoids(){
+    public double getPoids(){
          return poids;
     }
-    public void setPoids(float poids){
+    public void setPoids(double poids){
          this.poids=poids;
     }
     
-    public float getVolume(){
+    public double getVolume(){
          return volume;
     }
-    public void setVolume(float volume){
+    public void setVolume(double volume){
          this.volume=volume;
     }
 
