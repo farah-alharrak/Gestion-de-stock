@@ -29,25 +29,69 @@ public class ProduitFacade extends AbstractFacade<Produit> implements ProduitFac
     }
 
     @Override
-    public Boolean CreationProduit(String string, String string1, String string2, double d, double d1, double d2) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Boolean CreationProduit(String referenceProduit, String marqueProduit, String denomination, double prix, double poids, double volume) {
+
+        Boolean retour=false;
+        Produit Pr=(Produit) em.find(Produit.class, referenceProduit);
+        if(Pr!=null)
+        {
+
+
+           return(retour);
+        }
+
+        else {
+            Marque Mr = (Marque) em.find(Marque.class, marqueProduit);
+            
+            Pr=new Produit(referenceProduit, Mr, denomination, prix, poids, volume );
+            em.persist(Pr);
+        }
+
+        return(true);
     }
 
     @Override
-    public Boolean SuppressionProduit(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Boolean SuppressionProduit(String referenceProduit) {
+
+        Boolean retour = false;
+        
+        Produit p = (Produit) em.find(Produit.class, referenceProduit);
+        if(p==null){
+        return retour;
+        }
+        else{
+        remove(p);
+        }
+        return true;
     }
 
     @Override
-    public Boolean ModifierProduit(String string, String string1, String string2, double d, double d1, double d2) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Boolean ModifierProduit(String refProduit, String marqueProduit, String denomination, double prix, double poids, double volume) {
+        Boolean r = false;
+        Produit p = (Produit) em.find(Produit.class, refProduit);
+        Marque marqueProd = (Marque) em.find(Marque.class, marqueProduit);
+        if(p==null){return r;}
+        else{
+        Produit prod = new Produit(refProduit, marqueProd, denomination, prix, poids, volume);
+        edit(prod);
+        
+        }
+
+
     }
+    
+    @Override
+    public List<Produit> findAll(){
+        return em.createQuery("select object(o) from Produit as o").getResultList();
+    }
+    
 
         
 
     @Override
-    public List<Produit> findAllByMarque(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    public List<Produit> findAllByMarque(String nomM) {
+
+
+        return em.createQuery( "SELECT object(o) from Produit as o WHERE o.MarqueProduit.marqueReference = :marque").setParameter("marque", nomM).getResultList();    }
     
 }
