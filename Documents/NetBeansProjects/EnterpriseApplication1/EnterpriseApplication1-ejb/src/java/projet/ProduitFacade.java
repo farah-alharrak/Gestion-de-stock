@@ -43,10 +43,7 @@ public class ProduitFacade extends AbstractFacade<Produit> implements ProduitFac
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public Boolean ExistProduit(String string) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        
 
     @Override
     public List<Produit> findAllByMarque(String string) {
