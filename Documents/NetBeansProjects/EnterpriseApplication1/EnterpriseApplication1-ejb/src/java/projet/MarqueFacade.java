@@ -13,7 +13,7 @@ import javax.persistence.PersistenceContext;
  * @author hp
  */
 @Stateless
-public class MarqueFacade extends AbstractFacade<Marque> {
+public class MarqueFacade extends AbstractFacade<Marque> implements MarqueFacadeLocal {
 
     @PersistenceContext(unitName = "EnterpriseApplication1-ejbPU")
     private EntityManager em;
