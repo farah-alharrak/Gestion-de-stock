@@ -76,6 +76,7 @@ public class ProduitFacade extends AbstractFacade<Produit> implements ProduitFac
         edit(prod);
         
         }
+        return true;
 
 
     }
@@ -92,6 +93,6 @@ public class ProduitFacade extends AbstractFacade<Produit> implements ProduitFac
     public List<Produit> findAllByMarque(String nomM) {
 
 
-        return em.createQuery( "SELECT object(o) from Produit as o WHERE o.MarqueProduit.marqueReference = :marque").setParameter("marque", nomM).getResultList();    }
+        return em.createQuery( "SELECT object(o) from Produit as o WHERE o.marqueProduit.marqueReference = :marque").setParameter("marque", nomM).getResultList();    }
     
 }
