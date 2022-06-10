@@ -14,19 +14,15 @@ import javax.ejb.Local;
 @Local
 public interface ProduitFacadeLocal {
 
-    void create(Produit produit);
+    
 
-    void edit(Produit produit);
-
-    void remove(Produit produit);
-
-    Produit find(Object id);
+//    Produit find(Object id);
 
     List<Produit> findAll();
-
-    List<Produit> findRange(int[] range);
-
-    int count();
+//
+//    List<Produit> findRange(int[] range);
+//
+//    int count();
     
     Boolean CreationProduit(String referenceProduit, String marqueProduit, String denomination, double prix, double poids, double volume);
 
@@ -34,7 +30,7 @@ public interface ProduitFacadeLocal {
 
     Boolean ModifierProduit(String referenceProduit, String marqueProduit, String denomination, double prix, double poids, double volume);
 
-    Boolean ExistProduit(String RefProduit);
+    
     
     List<Produit> findAllByMarque(String nomM);
     
