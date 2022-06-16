@@ -12,17 +12,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import projet.ProduitFacadeLocal;
+import projet.MarqueFacade;
+import projet.MarqueFacadeLocal;
 
 /**
  *
  * @author hp
  */
-@WebServlet(name = "SuppressionProduit", urlPatterns = {"/SuppressionProduit"})
-public class SuppressionProduit extends HttpServlet {
-    
+@WebServlet(name = "CreationMarque", urlPatterns = {"/CreationMarque"})
+public class CreationMarque extends HttpServlet {
     @EJB
-    private ProduitFacadeLocal produitFacade;
+    private MarqueFacade m;
     
 
     /**
@@ -42,10 +42,10 @@ public class SuppressionProduit extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SuppressionProduit</title>");            
+            out.println("<title>Servlet CreationMarque</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SuppressionProduit at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CreationMarque at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,31 +63,34 @@ public class SuppressionProduit extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         response.setContentType("text/html");
-        try{PrintWriter out = response.getWriter();
-         out.println("<!DOCTYPE html>");
+        try{
+            PrintWriter out = response.getWriter();
+            out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<meta charset=\"UTF-8\">");
             out.println("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">");
             out.println("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">");
-             out.println("<link rel=\"stylesheet\" href=\"https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css\">");
+            
+            out.println("<link rel=\"stylesheet\" href=\"https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css\">");
             out.println("<title>Servlet CreationMarque</title>");            
             out.println("</head>");
             out.println("<body>");
             out.println("<input type=\"checkbox\" id=\"nav-toggle\">");
             out.println("<div class=\"sideBar\">");
             out.println("<div class=\"sideBar_Brand\">");
-            out.println("<h2><span class=\"las la-home\"></span><span> ShopiFayy</span></h2>");
+            out.println("<h2><span class=\"las la-home\"></span><span> ShopiFayy </span></h2>");
             out.println("</div>");
             out.println("<div class=\"sideBar_Menu\">");
             out.println("<ul>");
             out.println("<li>");
-            out.println("<a href=\"index.html\" ><span class=\"las la-box\"></span>");
+            out.println("<a href=\"index.html\" class=\"active\"><span class=\"las la-box\"></span>");
             out.println("<span>Les Marques</span></a>");
             out.println("</li>");
             out.println("<li>");
-            out.println("<a href=\"Produits.html\" class=\"active\" ><span class=\"lab la-product-hunt\"></span>");
+            out.println("<a href=\"Produits.html\" ><span class=\"lab la-product-hunt\"></span>");
             out.println("<span>Les Produits</span></a>");
             out.println("</li>");
             out.println("<li>");
@@ -103,32 +106,29 @@ public class SuppressionProduit extends HttpServlet {
             out.println("<h2>");
             out.println("<label for=\"nav-toggle\">");
             out.println("<span class=\"las la-bars\"></span>");
-            out.println("</label>Les Produits</h2>");
+            out.println("</label>Les Marques</h2>");
 
             out.println("<div class=\"search-wrapper\">");
             out.println("<span class=\"las la-search\"></span>");
-            out.println("<input type=\"search\" placeholder=\"Search here\">");
             out.println("</div>");
             out.println("</header>");
             out.println("<main>");
-            out.println("<form  action = \"http://localhost:8080/EntrepriseApplication1-war/SuppressionMarque\" method = \"POST\"> ");
+            out.println("<form  action = \"http://localhost:8080/EntrepriseApplication1-war/CreationMarque\" method = \"POST\"> ");
             out.println("Nom de la marque:");
             out.println("<input type=\"text\" name=\"NameM\" value =\"\" />");
             out.println("<br/>");            
-            out.println("<input type=\"submit\" value =\"Supprimer\" />");
-            out.println("La référence du produit que vous voulez supprimer: ");
-            out.println("<br/>");            
-            out.println("<input type=\"text\" name=\"RefProduit\" value =\"\" />");
-            out.println("<br/>");            
-            out.println("<input type=\"submit\" value =\"Supprimer\" />");
+            out.println("Pays d’origine:");
+            out.println("<input type=\"text\" name=\"OrigineM\" value =\"\" />");
+            out.println("<input type=\"submit\" value =\"Creer Marque\" />");
             out.println("</form>");        
             out.println("</body>");
             out.println("</html>");
-        }
-        catch(Exception e){
-        System.out.println("Probleme dans la servlet de suppression");}
-            
+        
+        }catch(Exception e){System.out.println("probleme dans la servlet de creation de marque");}
+    
     }
+        
+    
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -141,15 +141,16 @@ public class SuppressionProduit extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html");
-        try{
-            PrintWriter out = response.getWriter();
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
             out.println("<meta charset=\"UTF-8\">");
             out.println("<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">");
             out.println("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">");
+            
             out.println("<link rel=\"stylesheet\" href=\"https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css\">");
             out.println("<title>Servlet CreationMarque</title>");            
             out.println("</head>");
@@ -157,16 +158,16 @@ public class SuppressionProduit extends HttpServlet {
             out.println("<input type=\"checkbox\" id=\"nav-toggle\">");
             out.println("<div class=\"sideBar\">");
             out.println("<div class=\"sideBar_Brand\">");
-            out.println("<h2><span class=\"las la-home\"></span><span> ShopiFayy</span></h2>");
+            out.println("<h2><span class=\"las la-home\"></span><span> ShopiFayy </span></h2>");
             out.println("</div>");
             out.println("<div class=\"sideBar_Menu\">");
             out.println("<ul>");
             out.println("<li>");
-            out.println("<a href=\"index.html\" ><span class=\"las la-box\"></span>");
+            out.println("<a href=\"index.html\" class=\"active\"><span class=\"las la-box\"></span>");
             out.println("<span>Les Marques</span></a>");
             out.println("</li>");
             out.println("<li>");
-            out.println("<a href=\"Produits.html\" class=\"active\" ><span class=\"lab la-product-hunt\"></span>");
+            out.println("<a href=\"Produits.html\" ><span class=\"lab la-product-hunt\"></span>");
             out.println("<span>Les Produits</span></a>");
             out.println("</li>");
             out.println("<li>");
@@ -182,32 +183,34 @@ public class SuppressionProduit extends HttpServlet {
             out.println("<h2>");
             out.println("<label for=\"nav-toggle\">");
             out.println("<span class=\"las la-bars\"></span>");
-            out.println("</label>Les Produits</h2>");
+            out.println("</label>Les Marques</h2>");
 
             out.println("<div class=\"search-wrapper\">");
             out.println("<span class=\"las la-search\"></span>");
-            out.println("<input type=\"search\" placeholder=\"Search here\">");
             out.println("</div>");
             out.println("</header>");
             out.println("<main>");
-            Boolean ret=produitFacade.SuppressionProduit(request.getParameter("RefProduit"));
-            if(ret==true)
-            {
-                out.println("Produit supprime avec succes <br/>");
-            }
-            else
-            {
-                out.println("Ce produit n'existe pas. Impossible de supprimer le produit <br/>");
-            }
-            out.println("<form  action = \"http://localhost:8080/EntrepriseApplication1-war/SuppressionMarque\" method = \"GET\"> ");
+            String a = request.getParameter("NameM");
+            String b = request.getParameter("OrigineM");
+           
+            // tu enleves les commentaires
             
-            out.println("<input type=\"submit\" value =\"Retour\" />");
+//            Boolean ret=m.create( );
+//            if(ret==true)
+//            {
+//                out.println("Marque creee avec succes <br/>");
+//            }
+//            else
+//            {
+//                out.println("Le nom de la marque est deja assigne. Impossible de recreer une marque avec le meme nom<br/>");
+//            }
+            out.println("<form  action = \"http://localhost:8080/EntrepriseApplication1-war/CreationMarque\" method = \"GET\"> ");
+            out.println("<input type=\"submit\" value=\"Retour\">");
             out.println("</form>");        
             out.println("</body>");
             out.println("</html>");
-            
         
-        }catch(Exception e){System.out.println("Probleme dans la servlet de suppression");}
+        }catch(Exception e){System.out.println("probleme dans la sevlet creation marque ");}
     }
 
     /**
